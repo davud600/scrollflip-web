@@ -2,13 +2,15 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { useArticle } from '@/hooks/article'
 
 export default function NavbarMenu() {
+  const { CategoryState } = useArticle()
   const [isNavEnabled, setIsNavEnabled] = useState<boolean>(false)
   const toggleNav = () => setIsNavEnabled((prevState) => !prevState)
 
-  const redirectToUrl = (url: string) => {
-    // navigation.navigate(url)
+  const setCategory = (category: string) => {
+    CategoryState.setCategory(category)
     setIsNavEnabled(false)
   }
 
@@ -36,7 +38,6 @@ export default function NavbarMenu() {
         </div>
       </div>
 
-      {/* Desktop Nav */}
       {isNavEnabled && (
         <div
           className="absolute left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-2 text-black md:left-auto md:w-auto"
@@ -58,22 +59,22 @@ export default function NavbarMenu() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
               <span className="my-4 text-lg font-bold">Categories</span>
 
-              <button onClick={() => redirectToUrl('Shopping')}>
+              <button onClick={() => setCategory('Shopping')}>
                 <span style={{ fontSize: 15 }}>Shopping</span>
               </button>
-              <button onClick={() => redirectToUrl('Internet Finds')}>
+              <button onClick={() => setCategory('Internet Finds')}>
                 <span style={{ fontSize: 15 }}>Internet Finds</span>
               </button>
-              <button onClick={() => redirectToUrl('TVAndMovies')}>
+              <button onClick={() => setCategory('TVAndMovies')}>
                 <span style={{ fontSize: 15 }}>TV and Movies</span>
               </button>
-              <button onClick={() => redirectToUrl('Celebrity')}>
+              <button onClick={() => setCategory('Celebrity')}>
                 <span style={{ fontSize: 15 }}>Celebrity</span>
               </button>
-              <button onClick={() => redirectToUrl('Sex & Love')}>
+              <button onClick={() => setCategory('Sex & Love')}>
                 <span style={{ fontSize: 15 }}>Sex & Love</span>
               </button>
-              <button onClick={() => redirectToUrl('Community')}>
+              <button onClick={() => setCategory('Community')}>
                 <span style={{ fontSize: 15 }}>Community</span>
               </button>
             </div>
@@ -81,13 +82,13 @@ export default function NavbarMenu() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <span className="my-4 text-lg font-bold">About</span>
 
-                <button onClick={() => redirectToUrl('Newsletter')}>
+                <button onClick={() => window.location.replace('newsletter')}>
                   <span style={{ fontSize: 15 }}>Newsletter</span>
                 </button>
-                <button onClick={() => redirectToUrl('Privacy Policy')}>
+                <button onClick={() => window.location.replace('privacy')}>
                   <span style={{ fontSize: 15 }}>Privacy Policy</span>
                 </button>
-                <button onClick={() => redirectToUrl('@2023 ScrollFlip')}>
+                <button>
                   <span style={{ fontSize: 15 }}>@2023 ScrollFlip</span>
                 </button>
               </div>
@@ -95,9 +96,15 @@ export default function NavbarMenu() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <span className="my-4 text-lg font-bold">Account</span>
 
-                <span style={{ fontSize: 15 }}>Profile</span>
-                <span style={{ fontSize: 15 }}>Likes</span>
-                <span style={{ fontSize: 15 }}>@2023 Scrollflip</span>
+                <button onClick={() => window.location.replace('profile')}>
+                  <span style={{ fontSize: 15 }}>Profile</span>
+                </button>
+                <button onClick={() => window.location.replace('likes')}>
+                  <span style={{ fontSize: 15 }}>Likes</span>
+                </button>
+                <button>
+                  <span style={{ fontSize: 15 }}>@2023 Scrollflip</span>
+                </button>
               </div>
             </div>
           </div>

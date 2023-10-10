@@ -65,7 +65,7 @@ export default function LikeButton({ article }: LikeButtonProps) {
 
   return (
     <div>
-      <UniversalModal
+      {/* <UniversalModal
         close={closeModal}
         open={authWarningModalOpen}
         content={
@@ -85,7 +85,7 @@ export default function LikeButton({ article }: LikeButtonProps) {
             &nbsp;so we can track and save your favorite articles!
           </span>
         }
-      />
+      /> */}
 
       <button
         className="mx-2 bg-transparent px-2 py-2"
