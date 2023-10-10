@@ -59,6 +59,9 @@ export default function AuthButtons() {
               Log In
             </span>
           </button>
+          <button className="ml-4 rounded-full bg-[#144270] px-5 py-2 text-sm font-semibold text-white">
+            Sign Up
+          </button>
           {/* <Btn
             style={{
               paddingHorizontal: 15,

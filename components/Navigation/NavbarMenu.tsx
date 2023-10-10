@@ -1,13 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { useArticle } from '@/hooks/article'
+import { useOutsideClickDetector } from '@/hooks/outsideclick'
 
 export default function NavbarMenu() {
   const { CategoryState } = useArticle()
   const [isNavEnabled, setIsNavEnabled] = useState<boolean>(false)
   const toggleNav = () => setIsNavEnabled((prevState) => !prevState)
+
+  // Outside click for nav menu
+  const navRef = useRef<HTMLDivElement | null>(null)
+  useOutsideClickDetector(navRef, () => setIsNavEnabled(false))
 
   const setCategory = (category: string) => {
     CategoryState.setCategory(category)
@@ -40,6 +45,7 @@ export default function NavbarMenu() {
 
       {isNavEnabled && (
         <div
+          ref={navRef}
           className="absolute left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-2 text-black md:left-auto md:w-auto"
           style={{
             boxShadow: ' rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
