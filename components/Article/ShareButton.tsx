@@ -1,11 +1,4 @@
 import { useState } from 'react'
-import { Modal, View, Text, StyleSheet, Pressable, Linking } from 'react-native'
-import { IS_ON_DESKTOP } from '../../utils/settings'
-import tw from 'twrnc'
-import Icon from 'react-native-vector-icons/Feather'
-import Facebook from 'react-native-vector-icons/Entypo'
-
-import Close from 'react-native-vector-icons/Fontisto'
 
 type ShareButtonProps = {
   articleLink: string
@@ -24,7 +17,7 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
   }
 
   return (
-    <View
+    <div
       style={[
         tw`flex items-end justify-end`,
         {
@@ -32,7 +25,7 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
         },
       ]}
     >
-      <View
+      <div
         style={{
           backgroundColor: 'transparent',
           position: 'absolute',
@@ -61,16 +54,16 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
             ]}
           />
         </Pressable>
-      </View>
+      </div>
       <Modal
         animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={closeModal}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View
+        <div style={styles.modalContainer}>
+          <div style={styles.modalContent}>
+            <div
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -84,18 +77,18 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
               <Pressable onPress={closeModal}>
                 <Close name={'close-a'} size={18} color={'#000000'} />
               </Pressable>
-            </View>
-            <View>
-              <View>
+            </div>
+            <div>
+              <div>
                 <input
                   disabled
                   style={styles.inputStyle}
                   type="text"
                   value={articleLink}
                 />
-              </View>
-              <View style={styles.parentCopyView}>
-                <View style={styles.copyButton}>
+              </div>
+              <div style={styles.parentCopydiv}>
+                <div style={styles.copyButton}>
                   <Pressable
                     style={{
                       backgroundColor: '#008038',
@@ -113,7 +106,7 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
                       {copiedText ? 'Copied' : 'Copy Link'}
                     </Text>
                   </Pressable>
-                </View>
+                </div>
                 <Pressable
                   onPress={() => {
                     Linking.openURL(
@@ -154,12 +147,12 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
                     ]}
                   />
                 </Pressable>
-              </View>
-            </View>
-          </View>
-        </View>
+              </div>
+            </div>
+          </div>
+        </div>
       </Modal>
-    </View>
+    </div>
   )
 }
 
@@ -225,7 +218,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 5,
   },
-  parentCopyView: {
+  parentCopydiv: {
     display: 'flex',
     flexDirection: 'row',
     paddingVertical: 10,

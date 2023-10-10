@@ -10,6 +10,12 @@ export default function ReadmoreButton({ article }: ReadmoreButtonParams) {
   return (
     <button
       onClick={() => {
+        if (article.rssId === 'custom-article') {
+          console.log(article._id)
+          window.location.replace(`/article/${article._id}`)
+          return
+        }
+
         window.open(article.anchorHref, '_blank')
       }}
       className="bg-[#E01E26] px-6 py-3 font-bold md:px-5 md:py-2"

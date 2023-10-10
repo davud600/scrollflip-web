@@ -1,11 +1,12 @@
+'use client'
+
 import CustomArticleContent from '@/components/Article/CustomArticleContent'
 import ShareButton from '@/components/Article/ShareButton'
-import { useRouter } from 'next/router'
 import { type Article as ArticleType } from '@/types/article.types'
 import { useEffect, useState } from 'react'
+import ArticleService from '@/services/article.service'
 
-export default function Article() {
-  const router = useRouter()
+export default function Article({ params }: { params: { articleId: string } }) {
   const [article, setArticle] = useState<ArticleType | null>(null)
 
   useEffect(() => {
@@ -13,6 +14,12 @@ export default function Article() {
 
     const fetchArticle = async () => {
       try {
+        const response = await ArticleService.findArticle({
+          articleId: params.articleId,
+        })
+
+        const data = await response?.json()
+        setArticle(data.data)
       } catch (error) {
         return
       }
@@ -22,16 +29,18 @@ export default function Article() {
   }, [])
 
   return (
-    <div>
-      <div className="flex h-screen overflow-hidden bg-white">
-        {!!article && <CustomArticleContent article={article} />}
-        <ShareButton
-          articleLink={`${window.location}/article/${router.query.articleId}`}
-        />
-        {/* <ShareButton
-          articleLink={`${window.location}/?articleId=${route.params.article._id}`}
-        /> */}
-      </div>
-    </div>
+    <main>
+      <section className="mt-[64px]">
+        <div className="flex h-screen bg-white">
+          {!!article && <CustomArticleContent article={article} />}
+          {/* <ShareButton
+       articleLink={`${window.location}/article/${router.query.articleId}`}
+     /> */}
+          {/* <ShareButton
+       articleLink={`${window.location}/?articleId=${route.params.article._id}`}
+     /> */}
+        </div>
+      </section>
+    </main>
   )
 }

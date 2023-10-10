@@ -3,7 +3,7 @@ import { type Article } from '@/types/article.types'
 import { getTimeSinceArticleCreated } from '@/utils/article'
 import { useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import AddOrRemoveToWhishlistButton from './AddOrRemoveToWhishlistButton'
+import AddOrRemoveToWhishlistButton from '../Wishlist/AddOrRemoveToWhishlistButton'
 
 type CustomArticleContentProps = {
   article: Article
@@ -62,7 +62,7 @@ export default function CustomArticleContent({
         />
       )
     }
-  }, [document, JSON.stringify(userWishlistedProducts)])
+  }, [article, JSON.stringify(userWishlistedProducts)])
 
   return (
     <div
@@ -81,7 +81,7 @@ export default function CustomArticleContent({
         by <span className="font-bold text-[#144270]">{article.author}</span>
       </span>
 
-      <>{source}</>
+      <div dangerouslySetInnerHTML={{ __html: source.html }}></div>
     </div>
   )
 }
