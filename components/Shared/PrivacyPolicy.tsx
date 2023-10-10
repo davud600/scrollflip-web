@@ -78,7 +78,7 @@ We may share your information in the following circumstances:
               information.
             </p>
             <p>
-              <p>5. Children's Privacy {`\n`}</p>
+              <p>5. Children&apos;s Privacy {`\n`}</p>
               Our Services are not intended for individuals under the age of 16.
               We do not knowingly collect personal information from children. If
               you are a parent or guardian and believe that your child has
