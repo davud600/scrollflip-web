@@ -1,11 +1,11 @@
 'use client'
 
 import ArticlesList from '@/components/Article/Articlelist'
+import NoResults from '@/components/Article/NoResults'
 import { useArticle } from '@/hooks/article'
-import { Suspense } from 'react'
 
-export default function Home() {
-  const { ArticlesState, fetchArticles } = useArticle()
+export default function Search() {
+  const { ArticlesState, fetchSearchingArticles, SearchState } = useArticle()
 
   return (
     <main className="bg-white">
@@ -16,14 +16,17 @@ export default function Home() {
 
           <div className="flex w-full justify-center gap-10">
             {/* Articles list */}
-            <Suspense fallback={<p>Loading weather...</p>}>
-              <div className="w-full pb-96 md:w-[65%]">
+            <div className="w-full pb-96 md:w-[65%]">
+              {ArticlesState.searchingArticles.length === 0 &&
+              SearchState.search !== '' ? (
+                <NoResults />
+              ) : (
                 <ArticlesList
-                  articles={ArticlesState.articles}
-                  fetchArticles={fetchArticles}
+                  articles={ArticlesState.searchingArticles}
+                  fetchArticles={fetchSearchingArticles}
                 />
-              </div>
-            </Suspense>
+              )}
+            </div>
 
             {/* Ads right side */}
             <div className="hidden w-[32%] flex-col gap-96 md:flex">
