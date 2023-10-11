@@ -33,12 +33,11 @@ export default function Article({ params }: { params: { articleId: string } }) {
       <section className="mt-[64px]">
         <div className="flex h-screen bg-white">
           {!!article && <CustomArticleContent article={article} />}
-          {/* <ShareButton
-       articleLink={`${window.location}/article/${router.query.articleId}`}
-     /> */}
-          {/* <ShareButton
-       articleLink={`${window.location}/?articleId=${route.params.article._id}`}
-     /> */}
+          {!!article && (
+            <ShareButton
+              articleLink={`${window.location.origin}/article/${article._id}`}
+            />
+          )}
         </div>
       </section>
     </main>
