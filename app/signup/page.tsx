@@ -14,6 +14,22 @@ export default function Signup() {
                     htmlFor="email"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900  placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    placeholder="John"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium text-gray-900"
+                  >
                     Your email
                   </label>
                   <input
@@ -21,7 +37,7 @@ export default function Signup() {
                     name="email"
                     id="email"
                     className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900  placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    placeholder="name@company.com"
+                    placeholder="john@mail.com"
                     required
                   />
                 </div>
