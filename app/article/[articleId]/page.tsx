@@ -1,10 +1,10 @@
 'use client'
 
-import CustomArticleContent from '@/components/Article/CustomArticleContent'
 import ShareButton from '@/components/Article/ShareButton'
 import { type Article as ArticleType } from '@/types/article.types'
 import { useEffect, useState } from 'react'
 import ArticleService from '@/services/article.service'
+import CustomArticleContent from '@/components/Article/CustomArticleContent'
 
 export default function Article({ params }: { params: { articleId: string } }) {
   const [article, setArticle] = useState<ArticleType | null>(null)
@@ -33,10 +33,12 @@ export default function Article({ params }: { params: { articleId: string } }) {
       <section className="mt-[64px]">
         <div className="flex h-screen bg-white">
           {!!article && <CustomArticleContent article={article} />}
-          <ShareButton articleLink={`sfwef`} />
-          {/* <ShareButton
-       articleLink={`${window.location}/?articleId=${route.params.article._id}`}
-     /> */}
+
+          {!!article && (
+            <ShareButton
+              articleLink={`${window.location.origin}/article/${article._id}`}
+            />
+          )}
         </div>
       </section>
     </main>

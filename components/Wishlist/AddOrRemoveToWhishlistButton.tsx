@@ -1,4 +1,4 @@
-import { UserWishListedProduct } from '@/types/user.types'
+import { type UserWishListedProduct } from '@/types/user.types'
 import { useState } from 'react'
 
 type AddOrRemoveToWishlistButtonProps = {

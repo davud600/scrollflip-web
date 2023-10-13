@@ -27,6 +27,8 @@ export default function CustomArticleContent({
   const articleDate = new Date(article.created)
 
   useEffect(() => {
+    if (!!!document) return
+
     const xpath = "//div[contains(text(),'NUM_OF_PRODUCTS:')]"
     const numOfProductsElem: any = document.evaluate(
       xpath,
@@ -62,10 +64,10 @@ export default function CustomArticleContent({
         />
       )
     }
-  }, [article, JSON.stringify(userWishlistedProducts)])
+  }, [document, JSON.stringify(userWishlistedProducts)])
 
   return (
-    <div className="my-16 flex flex-col px-3 py-6 md:px-[20%]">
+    <div className="flex flex-col px-3 py-6 md:px-[20%]">
       <span className="mt-3 font-semibold underline">{article.category}</span>
       <span>Posted {getTimeSinceArticleCreated(articleDate)}</span>
 

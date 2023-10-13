@@ -2,7 +2,7 @@ import { useRef, type ReactNode } from 'react'
 import Image from 'next/image'
 import { useOutsideClickDetector } from '@/hooks/outsideclick'
 
-type UniversalModalProps = {
+type ModalProps = {
   open: boolean
   close: () => void
   title?: string
@@ -11,14 +11,14 @@ type UniversalModalProps = {
   contentOutside?: ReactNode
 }
 
-export default function UniversalModal({
+export default function Modal({
   open,
   close,
   title,
   text,
   content,
   contentOutside,
-}: UniversalModalProps) {
+}: ModalProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useOutsideClickDetector(ref, close)
@@ -26,7 +26,7 @@ export default function UniversalModal({
   return !open ? (
     <></>
   ) : (
-    <div className="fixed left-0 top-0 h-screen w-screen bg-[#00000040]">
+    <div className="fixed left-0 top-0 z-20 h-screen w-screen bg-[#00000040]">
       <div
         ref={ref}
         className="fixed left-1/2 top-1/2 z-50 w-[80%] -translate-x-[50%] -translate-y-[50%] bg-white md:w-[30%]"

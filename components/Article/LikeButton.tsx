@@ -2,7 +2,7 @@ import { useUser } from '@/hooks/user'
 import { Article } from '@/types/article.types'
 import { showMessage } from '@/utils/alerts'
 import { useState } from 'react'
-import UniversalModal from '../Shared/Modal'
+import Modal from '../Shared/Modal'
 
 type LikeButtonProps = {
   article: Article
@@ -65,7 +65,7 @@ export default function LikeButton({ article }: LikeButtonProps) {
 
   return (
     <div>
-      {/* <UniversalModal
+      <Modal
         close={closeModal}
         open={authWarningModalOpen}
         content={
@@ -85,7 +85,7 @@ export default function LikeButton({ article }: LikeButtonProps) {
             &nbsp;so we can track and save your favorite articles!
           </span>
         }
-      /> */}
+      />
 
       <button
         className="mx-2 bg-transparent px-2 py-2"

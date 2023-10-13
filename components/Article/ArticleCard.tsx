@@ -8,11 +8,10 @@ type ArticleCardProps = {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <div className="relative mb-12 h-[100vh] w-full snap-center overflow-hidden md:h-auto">
+    <div className="relative mb-12 h-[100vh] w-full overflow-hidden md:h-auto">
       <div
         className="flex h-[66%] !w-full flex-col items-start justify-end bg-cover bg-no-repeat md:h-[50vh]"
         style={{
-          // backgroundImage: `url('${article.imgSrc}')`,
           backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 75%, rgba(255,255,255,0.8309917717086834) 85%, rgba(255,255,255,1) 95%), url('${article.imgSrc}')`,
         }}
       >

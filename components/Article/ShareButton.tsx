@@ -38,164 +38,27 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
         close={closeModal}
         title="Share or Copy"
         contentOutside={
-          <div className="flex flex-col">
-            <input className="" type="text" disabled value={'link.com'} />
+          <div className="flex w-full flex-col gap-3">
+            <input
+              className="w-full rounded-sm border px-2 py-2 text-neutral-500"
+              type="text"
+              disabled
+              value={articleLink}
+            />
             <div className="flex">
-              <span>fb</span>
-              <span>ig</span>
+              <button
+                className="mb-2 mr-4 rounded-sm bg-[#144270] px-4 py-2 text-white"
+                onClick={() => {
+                  void navigator.clipboard.writeText(articleLink)
+                  setCopiedText(true)
+                }}
+              >
+                {copiedText ? 'Copied' : 'Copy Link'}
+              </button>
             </div>
           </div>
         }
       />
     </>
   )
-
-  // return (
-
-  // )
-
-  //     {modalVisible && (
-  //       <div className="fixed inset-0 z-50 flex items-center justify-center">
-  //         <div className="w-80 rounded-lg bg-white p-4 md:w-96">
-  //           <div className="flex flex-col items-center space-y-4">
-  //             <span className="text-lg font-medium">Share Article</span>
-  //             <input
-  //               className="w-full rounded-lg border border-gray-300 px-3 py-2"
-  //               disabled
-  //               type="text"
-  //               value={articleLink}
-  //             />
-  //             <div className="flex space-x-4">
-  //               <button
-  //                 className={`rounded-lg px-4 py-2 ${
-  //                   copiedText
-  //                     ? 'bg-green-500 text-white'
-  //                     : 'bg-blue-500 text-white'
-  //                 }`}
-  //                 onClick={() => {
-  //                   void navigator.clipboard.writeText(articleLink)
-  //                   setCopiedText(true)
-  //                 }}
-  //               >
-  //                 {copiedText ? 'Copied' : 'Copy Link'}
-  //               </button>
-  //               <button
-  //                 onClick={() => {
-  //                   window.open(
-  //                     `https://www.facebook.com/sharer/sharer.php?u=https%3A//${articleLink}`,
-  //                     '_blank'
-  //                   )
-  //                 }}
-  //                 className="rounded-lg bg-blue-500 px-4 py-2 text-white"
-  //               >
-  //                 Share on Facebook
-  //               </button>
-  //               <button
-  //                 onClick={() => {
-  //                   window.open(
-  //                     `https://twitter.com/intent/tweet?text=https%3A//${articleLink}`
-  //                   )
-  //                 }}
-  //                 className="rounded-lg bg-blue-500 px-4 py-2 text-white"
-  //               >
-  //                 Share on Twitter
-  //               </button>
-  //             </div>
-  //           </div>
-  //           <button
-  //             className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
-  //             onClick={closeModal}
-  //           >
-  //             <svg
-  //               className="h-5 w-5"
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               viewBox="0 0 20 20"
-  //             >
-  //               <path
-  //                 fillRule="evenodd"
-  //                 d="M13.293 6.293a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L12 7.414 7.707 11.707a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0z"
-  //                 clipRule="evenodd"
-  //               />
-  //             </svg>
-  //           </button>
-  //         </div>
-  //       </div>
-  //     )}
-  //   </div>
-  // )
 }
-// const styles = StyleSheet.create({
-//   modalContainer: {
-//     flex: 1,
-//     display: 'flex',
-//     flexDirection: 'column',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-//   },
-//   modalContent: {
-//     display: 'flex',
-//     justifyContent: 'space-between',
-//     backgroundColor: 'white',
-//     borderRadius: 10,
-//     width: IS_ON_DESKTOP ? '30%' : '80%',
-//     height: IS_ON_DESKTOP ? '20%' : '30%',
-//     padding: 20,
-//     elevation: 10,
-//   },
-//   modalText: {
-//     lineHeight: 30,
-//     flex: 1,
-//     justifyContent: 'flex-start',
-//     fontSize: 18,
-//     marginBottom: 20,
-//     textAlign: 'center',
-//   },
-//   closeButton: {
-//     backgroundColor: '#144270',
-//     paddingVertical: 10,
-//     marginVertical: 20,
-//     borderRadius: 5,
-//   },
-//   closeButtonText: {
-//     color: 'white',
-//     fontSize: 16,
-//     textAlign: 'center',
-//   },
-//   loginLinkText: {
-//     textDecorationLine: 'underline',
-//     fontSize: 17,
-//     lineHeight: 25,
-//     color: '#144270',
-//   },
-//   copyButton: {
-//     marginTop: 20,
-//     borderRadius: 5,
-//   },
-//   copyButtonText: {
-//     color: 'white',
-//     fontSize: 16,
-//     textAlign: 'center',
-//   },
-//   inputStyle: {
-//     paddingTop: 10,
-//     paddingBottom: 10,
-//     paddingRight: 5,
-//     paddingLeft: 5,
-//     fontSize: 15,
-//     marginTop: 20,
-//     borderRadius: 5,
-//   },
-//   parentCopydiv: {
-//     display: 'flex',
-//     flexDirection: 'row',
-//     paddingVertical: 10,
-//     gap: 25,
-//   },
-//   iconButton: {
-//     backgroundColor: 'transparent',
-//     paddingVertical: 10,
-//     marginTop: 20,
-//     borderRadius: 5,
-//   },
-// })
