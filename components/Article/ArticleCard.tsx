@@ -8,7 +8,7 @@ type ArticleCardProps = {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <div className="relative mb-12 h-[100vh] w-full overflow-hidden md:h-auto">
+    <div className="relative h-[100svh] w-full overflow-hidden md:h-auto md:pb-12">
       <div
         className="flex h-[66%] !w-full flex-col items-start justify-end bg-cover bg-no-repeat md:h-[50vh]"
         style={{

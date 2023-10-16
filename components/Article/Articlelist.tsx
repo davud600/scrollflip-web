@@ -25,16 +25,27 @@ export default function ArticlesList({
         initialLoad={false}
         hasMore={true}
         loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
+          <svg
+            key={0}
+            className="spinner absolute left-1/2 top-1/2 -z-20 h-screen w-screen -translate-x-1/2 -translate-y-1/2"
+            viewBox="0 0 50 50"
+          >
+            <circle
+              className="path"
+              cx="25"
+              cy="25"
+              r="20"
+              fill="none"
+              stroke-width="5"
+            ></circle>
+          </svg>
         }
         useWindow={false}
         getScrollParent={() => scrollParentRef.current}
       >
         {articles.map((article, index) => (
           <div
-            className="h-[100svh] snap-center md:h-fit"
+            className="h-[100svh] snap-center bg-white md:h-fit"
             key={`${article._id}${index}`}
           >
             <ArticleCard article={article} />

@@ -48,21 +48,13 @@ export default function NavbarMenu() {
           ref={navRef}
           className="absolute left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-2 text-black md:left-auto md:w-auto"
           style={{
-            boxShadow: ' rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+            boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
             filter:
-              ' drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
+              'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              padding: 30,
-              gap: 40,
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          <div className="flex flex-wrap gap-10 p-8">
+            <div className="flex flex-col items-start gap-2 text-start">
               <span className="my-4 text-lg font-bold">Categories</span>
 
               <button onClick={() => setCategory('Shopping')}>
@@ -84,8 +76,8 @@ export default function NavbarMenu() {
                 <span style={{ fontSize: 15 }}>Community</span>
               </button>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+            <div className="flex flex-col items-start gap-2 text-start">
+              <div className="flex flex-col items-start gap-2 text-start">
                 <span className="my-4 text-lg font-bold">About</span>
 
                 <button onClick={() => window.location.replace('newsletter')}>
@@ -99,7 +91,7 @@ export default function NavbarMenu() {
                 </button>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+              <div className="flex flex-col items-start gap-2 text-start">
                 <span className="my-4 text-lg font-bold">Account</span>
 
                 <button onClick={() => window.location.replace('profile')}>
