@@ -8,7 +8,7 @@ type AddOrRemoveToWishlistButtonProps = {
   removeProductFromWishlist: (product: UserWishListedProduct) => void
 }
 
-export default function AddOrRemoveToWhishlistButton({
+export default function AddOrRemoveToWishlistButton({
   product,
   userWishlistedProducts,
   addProductToWishlist,

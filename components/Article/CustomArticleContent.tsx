@@ -5,7 +5,7 @@ import { type Article } from '@/types/article.types'
 import { getTimeSinceArticleCreated } from '@/utils/article'
 import { useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import AddOrRemoveToWhishlistButton from '../Wishlist/AddOrRemoveToWhishlistButton'
+import AddOrRemoveToWishlistButton from '../Wishlist/AddOrRemoveToWishlistButton'
 
 type CustomArticleContentProps = {
   article: Article
@@ -27,8 +27,6 @@ export default function CustomArticleContent({
   const articleDate = new Date(article.created)
 
   useEffect(() => {
-    if (!!!document) return
-
     const xpath = "//div[contains(text(),'NUM_OF_PRODUCTS:')]"
     const numOfProductsElem: any = document.evaluate(
       xpath,
@@ -37,13 +35,10 @@ export default function CustomArticleContent({
       XPathResult.FIRST_ORDERED_NODE_TYPE,
       null
     ).singleNodeValue
-
     if (!!!numOfProductsElem) return
-
-    const numOfProducts = numOfProductsElem.innerText.slice(16)
-
+    const numOfProducts = parseInt(numOfProductsElem.innerText.slice(16))
     for (let i = 0; i < numOfProducts; i++) {
-      const xpath = `//div[contains(text(),'PRODUCT${i}:')]`
+      const xpath = `//span[contains(text(),'PRODUCT${i}:')]`
       const productElem: any = document.evaluate(
         xpath,
         document,
@@ -51,12 +46,11 @@ export default function CustomArticleContent({
         XPathResult.FIRST_ORDERED_NODE_TYPE,
         null
       ).singleNodeValue
-
+      console.log({ productElem })
       if (!!!productElem) continue
-
       const root = createRoot(productElem)
       root.render(
-        <AddOrRemoveToWhishlistButton
+        <AddOrRemoveToWishlistButton
           product={JSON.parse(productElem.innerText.slice(9))}
           userWishlistedProducts={userWishlistedProducts}
           addProductToWishlist={addProductToWishlist}
@@ -64,7 +58,23 @@ export default function CustomArticleContent({
         />
       )
     }
-  }, [document, JSON.stringify(userWishlistedProducts)])
+
+    // const wishlistBtnElems = document.querySelectorAll('.product-wishlist-btn')
+
+    // wishlistBtnElems.forEach((wishlistBtnElem: any) => {
+    //   console.log({ wishlistBtnElem })
+
+    //   const root = createRoot(wishlistBtnElem)
+    //   root.render(
+    //     <AddOrRemoveToWishlistButton
+    //       product={JSON.parse(wishlistBtnElem.innerText.slice(9))}
+    //       userWishlistedProducts={userWishlistedProducts}
+    //       addProductToWishlist={addProductToWishlist}
+    //       removeProductFromWishlist={removeProductFromWishlist}
+    //     />
+    //   )
+    // })
+  }, [JSON.stringify(userWishlistedProducts)])
 
   return (
     <div className="flex flex-col px-3 py-6 md:px-[20%]">
