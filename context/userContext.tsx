@@ -199,14 +199,14 @@ export default function UserProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const logOut = async (navigation: any) => {
+  const logOut = async () => {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
 
     setUser(null)
     setToken(null)
 
-    navigation.navigate('Log In')
+    window.location.replace('/login')
   }
   /**
    * Auth END

@@ -1,4 +1,79 @@
+'use client'
+
+import { useUser } from '@/hooks/user'
+import { showMessage } from '@/utils/alerts'
+import { useEffect, useState } from 'react'
+
 export default function Signup() {
+  const { signUp } = useUser()
+  const [username, setUsername] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const [signUpFailed, setSignUpFailed] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (!signUpFailed) {
+      setTimeout(() => {
+        window.location.replace('/login')
+      }, 750)
+
+      setSignUpFailed(true)
+    }
+  }, [signUpFailed])
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+
+    if (!!!username || !!!password || !!!confirmPassword || !!!email) {
+      showMessage({
+        message: 'Please fill out all the required fields!',
+        type: 'danger',
+      })
+      return
+    } else if (username.length < 3) {
+      showMessage({
+        message: 'Username should be 3 characters or longer!',
+        type: 'danger',
+      })
+      return
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMessage({
+        message: 'E-Mail is not valid!',
+        type: 'danger',
+      })
+      return
+    } else if (password !== confirmPassword) {
+      showMessage({
+        message: 'Passwords do not match!',
+        type: 'danger',
+      })
+      return
+    } else if (password.length < 8) {
+      showMessage({
+        message: 'Password should be 8 characters or longer!',
+        type: 'danger',
+      })
+      return
+    }
+
+    await signUp(
+      { email, password, confirmPassword, username },
+      (error) =>
+        showMessage({
+          message: error,
+          type: 'danger',
+        }),
+      () => {
+        showMessage({
+          message: 'Account created successfully!',
+          type: 'success',
+        })
+        setSignUpFailed(false)
+      }
+    )
+  }
+
   return (
     <main>
       <section className="bg-gray-50">
@@ -8,7 +83,10 @@ export default function Signup() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Create and account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={(e) => handleSubmit(e)}
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -22,6 +100,8 @@ export default function Signup() {
                     id="name"
                     className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900  placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     placeholder="John"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                   />
                 </div>
@@ -38,6 +118,8 @@ export default function Signup() {
                     id="email"
                     className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900  placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     placeholder="john@mail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -54,6 +136,8 @@ export default function Signup() {
                     id="password"
                     placeholder="••••••••"
                     className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -70,6 +154,8 @@ export default function Signup() {
                     id="confirm-password"
                     placeholder="••••••••"
                     className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
                 </div>

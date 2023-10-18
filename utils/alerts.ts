@@ -1,7 +1,7 @@
 type ShowMessageParams = {
   message?: string
   type: 'success' | 'danger' | 'info'
-  hideOnPress: boolean
+  hideOnPress?: boolean
 }
 
 export function showMessage({

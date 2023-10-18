@@ -15,14 +15,14 @@ export default function WishList() {
   } = useUser()
 
   // Outside click for wishlist
-  const wishlistRef = useRef<HTMLDivElement | null>(null)
-  useOutsideClickDetector(wishlistRef, () => setIsEnabledWishlist(false))
+  // const wishlistRef = useRef<HTMLDivElement | null>(null)
+  // useOutsideClickDetector(wishlistRef, () => setIsEnabledWishlist(false))
 
   return !isEnabledWishlist ? (
     <></>
   ) : (
     <div
-      ref={wishlistRef}
+      // ref={wishlistRef}
       className="fixed left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-4 text-black md:left-[65%] md:w-[350px]"
       style={{
         boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',

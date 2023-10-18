@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { useArticle } from '@/hooks/article'
 import { useOutsideClickDetector } from '@/hooks/outsideclick'
+import Link from 'next/link'
 
 export default function NavbarMenu() {
   const { CategoryState } = useArticle()
@@ -80,12 +81,12 @@ export default function NavbarMenu() {
               <div className="flex flex-col items-start gap-2 text-start">
                 <span className="my-4 text-lg font-bold">About</span>
 
-                <button onClick={() => window.location.replace('newsletter')}>
+                <Link href={'/newsletter'}>
                   <span style={{ fontSize: 15 }}>Newsletter</span>
-                </button>
-                <button onClick={() => window.location.replace('privacy')}>
+                </Link>
+                <Link href={'/privacy'}>
                   <span style={{ fontSize: 15 }}>Privacy Policy</span>
-                </button>
+                </Link>
                 <button>
                   <span style={{ fontSize: 15 }}>@2023 ScrollFlip</span>
                 </button>
@@ -94,12 +95,12 @@ export default function NavbarMenu() {
               <div className="flex flex-col items-start gap-2 text-start">
                 <span className="my-4 text-lg font-bold">Account</span>
 
-                <button onClick={() => window.location.replace('profile')}>
+                <Link href={'/profile'}>
                   <span style={{ fontSize: 15 }}>Profile</span>
-                </button>
-                <button onClick={() => window.location.replace('likes')}>
+                </Link>
+                <Link href={'/likes'}>
                   <span style={{ fontSize: 15 }}>Likes</span>
-                </button>
+                </Link>
                 <button>
                   <span style={{ fontSize: 15 }}>@2023 Scrollflip</span>
                 </button>
