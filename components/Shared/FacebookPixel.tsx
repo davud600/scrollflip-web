@@ -1,10 +1,11 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import Script from 'next/script'
 
 export default function FacebookPixel() {
   return (
     <>
-      <Script>
+      <Script id="pixel">
         {`!function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -18,7 +19,8 @@ export default function FacebookPixel() {
       </Script>
       <Head>
         <noscript>
-          <img
+          <Image
+            alt=""
             height="1"
             width="1"
             style={{ display: 'none' }}
