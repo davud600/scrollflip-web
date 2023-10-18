@@ -4,10 +4,11 @@ import { useState } from 'react'
 import Modal from '../Shared/Modal'
 
 type ShareButtonProps = {
-  articleLink: string
+  articleId: string
 }
 
-export default function ShareButton({ articleLink }: ShareButtonProps) {
+export default function ShareButton({ articleId }: ShareButtonProps) {
+  const articleLink = `${window.location.origin}/article/${articleId}`
   const [copiedText, setCopiedText] = useState<boolean>(false)
   const [modalVisible, setModalVisible] = useState<boolean>(false)
 
@@ -35,6 +36,7 @@ export default function ShareButton({ articleLink }: ShareButtonProps) {
           </svg>
         </button>
       </div>
+
       <Modal
         open={modalVisible}
         close={closeModal}

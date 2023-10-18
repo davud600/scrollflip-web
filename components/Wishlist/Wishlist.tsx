@@ -23,7 +23,7 @@ export default function WishList() {
   ) : (
     <div
       ref={wishlistRef}
-      className="fixed left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-6 text-black md:left-[65%] md:w-[350px]"
+      className="fixed left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-4 text-black md:left-[65%] md:w-[350px]"
       style={{
         boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
         filter:
@@ -50,7 +50,7 @@ export default function WishList() {
         </button>
       </div>
 
-      <div className="h-[200px] md:h-[250px]">
+      <div className="h-[200px] overflow-y-scroll md:h-[250px]">
         {userWishlistedProducts.map((item, index) => (
           <div
             key={`${item.name}${index}`}
@@ -106,19 +106,19 @@ export default function WishList() {
       </div>
 
       {!UserState.user && (
-        <div className="top-[20px] mb-4 flex flex-col items-center justify-center bg-white p-4">
+        <div className="top-[20px] mb-2 flex flex-col items-center justify-center rounded-sm border border-[rgba(0,_0,_0,_0.1)] bg-white p-1">
           <Image
-            className="my-2 ml-auto mr-auto h-[40px] w-[40px]"
+            className="my-1 ml-auto mr-auto h-[30px] w-[30px]"
             src={require('public/wishlist-heart.png')}
             alt="image"
           />
 
-          <span className="my-4 w-full text-center">
+          <span className="my-2 w-full text-center text-sm">
             Sign in to permanently save products, edit, and access your full
             wishlist from any device.
           </span>
           <button>
-            <span className="mt-3 rounded-sm bg-white py-1 text-center font-bold text-[#e01e27]">
+            <span className="mt-2 rounded-sm bg-white py-1 text-center font-bold text-[#e01e27]">
               Sign in or create an account
             </span>
           </button>

@@ -16,7 +16,9 @@ export default function AddOrRemoveToWishlistButton({
 }: AddOrRemoveToWishlistButtonProps) {
   let isProductWishlisted = false
   userWishlistedProducts.forEach((item) => {
-    if (item.name === product.name) isProductWishlisted = true
+    if (item.name === product.name) {
+      isProductWishlisted = true
+    }
   })
 
   const [isWishlisted, setIsWishlisted] = useState(!isProductWishlisted)
