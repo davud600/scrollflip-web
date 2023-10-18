@@ -1,6 +1,7 @@
 'use client'
 
 import { useUser } from '@/hooks/user'
+import Link from 'next/link'
 
 export default function AuthButtons() {
   const { UserState, logOut } = useUser()
@@ -23,7 +24,7 @@ export default function AuthButtons() {
               marginLeft: 2,
             }}
             onClick={() => {
-              // logOut(navigation)
+              logOut()
             }}
           >
             <span
@@ -39,7 +40,8 @@ export default function AuthButtons() {
         </>
       ) : (
         <>
-          <button
+          <Link
+            href={'/login'}
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -47,7 +49,6 @@ export default function AuthButtons() {
               marginRight: 2,
               marginLeft: 2,
             }}
-            onClick={() => console.log('')}
           >
             <span
               style={{
@@ -58,28 +59,13 @@ export default function AuthButtons() {
             >
               Log In
             </span>
-          </button>
-          {/* <Btn
-            style={{
-              paddingHorizontal: 15,
-              paddingBottom: 7,
-              paddingTop: 7,
-              borderRadius: 50,
-              marginLeft: 10,
-              // marginRight: IS_ON_DESKTOP
-              //   ? Dimensions.get('window').width / 10
-              //   : 0,
-              borderColor: '#144270',
-              borderWidth: 2,
-            }}
-            onPress={() => navigation.navigate('Sign Up')}
-            textStyle={{
-              color: 'white',
-              fontSize: 14,
-              fontWeight: 'bold',
-            }}
-            text="Sign Up"
-          /> */}
+          </Link>
+          <Link
+            href={'/signup'}
+            className="ml-4 rounded-full bg-[#144270] px-5 py-2 text-sm font-semibold text-white"
+          >
+            Sign Up
+          </Link>
         </>
       )}
     </div>

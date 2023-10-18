@@ -61,7 +61,7 @@ export type UserContextData = {
     errorCallback?: statusCallback,
     successCallback?: statusCallback
   ) => Promise<void>
-  logOut: (navigation: any) => Promise<void>
+  logOut: () => Promise<void>
   signUp: (
     { email, username, password, confirmPassword }: SignUpCredentials,
     errorCallback?: statusCallback,

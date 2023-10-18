@@ -38,10 +38,6 @@ export default function Navbar() {
           <div className="hidden md:block">
             <AuthButtons />
           </div>
-          {/* 
-          {!!localStorage.getItem('user') && <NavbarProfileBtn />}
-          {!!localStorage.getItem('user') && <NavbarFavoriteArticlesBtn />}
-           */}
         </div>
       </div>
 

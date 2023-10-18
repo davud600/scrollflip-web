@@ -1,13 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { useArticle } from '@/hooks/article'
+import { useOutsideClickDetector } from '@/hooks/outsideclick'
+import Link from 'next/link'
 
 export default function NavbarMenu() {
   const { CategoryState } = useArticle()
   const [isNavEnabled, setIsNavEnabled] = useState<boolean>(false)
   const toggleNav = () => setIsNavEnabled((prevState) => !prevState)
+
+  // Outside click for nav menu
+  const navRef = useRef<HTMLDivElement | null>(null)
+  useOutsideClickDetector(navRef, () => setIsNavEnabled(false))
 
   const setCategory = (category: string) => {
     CategoryState.setCategory(category)
@@ -40,23 +46,16 @@ export default function NavbarMenu() {
 
       {isNavEnabled && (
         <div
+          ref={navRef}
           className="absolute left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-2 text-black md:left-auto md:w-auto"
           style={{
-            boxShadow: ' rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+            boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
             filter:
-              ' drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
+              'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              padding: 30,
-              gap: 40,
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          <div className="flex flex-wrap gap-10 p-8">
+            <div className="flex flex-col items-start gap-2 text-start">
               <span className="my-4 text-lg font-bold">Categories</span>
 
               <button onClick={() => setCategory('Shopping')}>
@@ -78,30 +77,30 @@ export default function NavbarMenu() {
                 <span style={{ fontSize: 15 }}>Community</span>
               </button>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+            <div className="flex flex-col items-start gap-2 text-start">
+              <div className="flex flex-col items-start gap-2 text-start">
                 <span className="my-4 text-lg font-bold">About</span>
 
-                <button onClick={() => window.location.replace('newsletter')}>
+                <Link href={'/newsletter'}>
                   <span style={{ fontSize: 15 }}>Newsletter</span>
-                </button>
-                <button onClick={() => window.location.replace('privacy')}>
+                </Link>
+                <Link href={'/privacy'}>
                   <span style={{ fontSize: 15 }}>Privacy Policy</span>
-                </button>
+                </Link>
                 <button>
                   <span style={{ fontSize: 15 }}>@2023 ScrollFlip</span>
                 </button>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+              <div className="flex flex-col items-start gap-2 text-start">
                 <span className="my-4 text-lg font-bold">Account</span>
 
-                <button onClick={() => window.location.replace('profile')}>
+                <Link href={'/profile'}>
                   <span style={{ fontSize: 15 }}>Profile</span>
-                </button>
-                <button onClick={() => window.location.replace('likes')}>
+                </Link>
+                <Link href={'/likes'}>
                   <span style={{ fontSize: 15 }}>Likes</span>
-                </button>
+                </Link>
                 <button>
                   <span style={{ fontSize: 15 }}>@2023 Scrollflip</span>
                 </button>

@@ -1,9 +1,13 @@
+'use client'
+
 import { useUser } from '@/hooks/user'
 import { type Article } from '@/types/article.types'
 import { getTimeSinceArticleCreated } from '@/utils/article'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
-import AddOrRemoveToWhishlistButton from '../Wishlist/AddOrRemoveToWhishlistButton'
+import AddOrRemoveToWishlistButton from '../Wishlist/AddOrRemoveToWishlistButton'
+
+const ButtonRoots: any = {}
 
 type CustomArticleContentProps = {
   article: Article
@@ -18,6 +22,8 @@ export default function CustomArticleContent({
     removeProductFromWishlist,
   } = useUser()
 
+  const contentContainerRef = useRef<HTMLDivElement | null>(null)
+
   const articleContent = article.content
   const source = {
     html: articleContent.substring(0, articleContent.length - 120),
@@ -25,53 +31,48 @@ export default function CustomArticleContent({
   const articleDate = new Date(article.created)
 
   useEffect(() => {
-    if (!!!document) return
+    if (!!!contentContainerRef.current) return
 
-    const xpath = "//div[contains(text(),'NUM_OF_PRODUCTS:')]"
-    const numOfProductsElem: any = document.evaluate(
-      xpath,
-      document,
-      null,
-      XPathResult.FIRST_ORDERED_NODE_TYPE,
-      null
-    ).singleNodeValue
+    contentContainerRef.current.innerHTML = source.html
+  }, [])
 
-    if (!!!numOfProductsElem) return
+  useEffect(() => {
+    const wishlistBtnElems = document.querySelectorAll('.product-wishlist-btn')
 
-    const numOfProducts = numOfProductsElem.innerText.slice(16)
+    wishlistBtnElems.forEach((wishlistBtnElem: any) => {
+      const product = JSON.parse(wishlistBtnElem.innerText.slice(9))
 
-    for (let i = 0; i < numOfProducts; i++) {
-      const xpath = `//div[contains(text(),'PRODUCT${i}:')]`
-      const productElem: any = document.evaluate(
-        xpath,
-        document,
-        null,
-        XPathResult.FIRST_ORDERED_NODE_TYPE,
-        null
-      ).singleNodeValue
+      ButtonRoots[product.name] = {
+        root: createRoot(wishlistBtnElem),
+        product: JSON.parse(wishlistBtnElem.innerText.slice(9)),
+      }
 
-      if (!!!productElem) continue
+      ButtonRoots[product.name].root.render(
+        <AddOrRemoveToWishlistButton
+          product={product}
+          userWishlistedProducts={userWishlistedProducts}
+          addProductToWishlist={addProductToWishlist}
+          removeProductFromWishlist={removeProductFromWishlist}
+        />
+      )
+    })
+  }, [])
 
-      const root = createRoot(productElem)
-      root.render(
-        <AddOrRemoveToWhishlistButton
-          product={JSON.parse(productElem.innerText.slice(9))}
+  useEffect(() => {
+    for (const key in ButtonRoots) {
+      ButtonRoots[key].root.render(
+        <AddOrRemoveToWishlistButton
+          product={ButtonRoots[key].product}
           userWishlistedProducts={userWishlistedProducts}
           addProductToWishlist={addProductToWishlist}
           removeProductFromWishlist={removeProductFromWishlist}
         />
       )
     }
-  }, [article, JSON.stringify(userWishlistedProducts)])
+  }, [JSON.stringify(userWishlistedProducts)])
 
   return (
-    <div
-      className="px-3 py-12 md:px-[20%]"
-      style={{
-        paddingTop: 25,
-        paddingBottom: 25,
-      }}
-    >
+    <div className="flex flex-col px-3 py-6 md:px-[20%]">
       <span className="mt-3 font-semibold underline">{article.category}</span>
       <span>Posted {getTimeSinceArticleCreated(articleDate)}</span>
 
@@ -81,7 +82,7 @@ export default function CustomArticleContent({
         by <span className="font-bold text-[#144270]">{article.author}</span>
       </span>
 
-      <div dangerouslySetInnerHTML={{ __html: source.html }}></div>
+      <div ref={contentContainerRef}></div>
     </div>
   )
 }

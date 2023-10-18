@@ -1,7 +1,9 @@
 'use client'
 
+import { useOutsideClickDetector } from '@/hooks/outsideclick'
 import { useUser } from '@/hooks/user'
 import Image from 'next/image'
+import { useRef } from 'react'
 
 export default function WishList() {
   const {
@@ -12,25 +14,24 @@ export default function WishList() {
     removeProductFromWishlist,
   } = useUser()
 
+  // Outside click for wishlist
+  // const wishlistRef = useRef<HTMLDivElement | null>(null)
+  // useOutsideClickDetector(wishlistRef, () => setIsEnabledWishlist(false))
+
   return !isEnabledWishlist ? (
     <></>
   ) : (
     <div
-      className="fixed left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-6 text-black md:left-[65%] md:w-[350px]"
+      // ref={wishlistRef}
+      className="fixed left-0 top-[63px] z-50 w-screen rounded-sm bg-[#faf9f7] p-4 text-black md:left-[65%] md:w-[350px]"
       style={{
-        boxShadow: ' rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+        boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
         filter:
-          ' drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
+          'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
       }}
     >
       <div className="flex justify-between">
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginBottom: 20,
-          }}
-        >
+        <div className="mb-5 flex flex-col">
           <span style={{ fontSize: 18, fontWeight: 'bold' }}>
             Your Wishlist
           </span>
@@ -49,46 +50,21 @@ export default function WishList() {
         </button>
       </div>
 
-      <div className="h-[200px] md:h-[250px]">
+      <div className="h-[200px] overflow-y-scroll md:h-[250px]">
         {userWishlistedProducts.map((item, index) => (
           <div
             key={`${item.name}${index}`}
             onClick={() => window.open(item.redirectUrl, '_blank')}
             className="cursor-pointer"
           >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                backgroundColor: 'white',
-                borderWidth: 1,
-                borderColor: 'rgba(0, 0, 0, 0.1)',
-                padding: 5,
-                marginBottom: 5,
-                borderRadius: 5,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <div
-                style={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}
-              >
+            <div className="mb-2 flex items-center justify-between rounded-sm border border-[rgba(0,_0,_0,_0.1)] bg-white p-2">
+              <div className="flex items-center">
                 <Image
+                  className="my-2 h-[70px] w-[70px] object-contain"
                   src={item.imageUrl}
                   alt={item.name}
                   width={70}
                   height={70}
-                  style={{
-                    width: 70,
-                    height: 70,
-                    marginTop: 5,
-                    marginBottom: 5,
-                    objectFit: 'contain',
-                  }}
                 />
                 <div>
                   <span>
@@ -112,18 +88,7 @@ export default function WishList() {
               </div>
               {UserState.user && (
                 <button onClick={() => removeProductFromWishlist(item)}>
-                  <div
-                    style={{
-                      height: 30,
-                      width: 30,
-                      marginRight: 10,
-                      borderRadius: 5,
-                      backgroundColor: '#282828',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <div className="mr-4 flex h-[30px] w-[30px] items-center justify-center rounded-sm bg-[#282828]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       height="1em"
@@ -141,46 +106,19 @@ export default function WishList() {
       </div>
 
       {!UserState.user && (
-        <div
-          style={{
-            padding: 10,
-            backgroundColor: 'white',
-            top: 20,
-            marginBottom: 20,
-          }}
-        >
+        <div className="top-[20px] mb-2 flex flex-col items-center justify-center rounded-sm border border-[rgba(0,_0,_0,_0.1)] bg-white p-1">
           <Image
-            style={{
-              width: 40,
-              height: 40,
-              marginTop: 5,
-              marginBottom: 5,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
+            className="my-1 ml-auto mr-auto h-[30px] w-[30px]"
             src={require('public/wishlist-heart.png')}
             alt="image"
           />
 
-          <span className="my-4 text-center">
+          <span className="my-2 w-full text-center text-sm">
             Sign in to permanently save products, edit, and access your full
             wishlist from any device.
           </span>
           <button>
-            <span
-              style={{
-                textAlign: 'center',
-                backgroundColor: 'white',
-                borderWidth: 1,
-                borderColor: '#e01e27',
-                color: '#e01e27',
-                marginTop: 10,
-                paddingTop: 3,
-                paddingBottom: 3,
-                borderRadius: 5,
-                fontWeight: 'bold',
-              }}
-            >
+            <span className="mt-2 rounded-sm bg-white py-1 text-center font-bold text-[#e01e27]">
               Sign in or create an account
             </span>
           </button>

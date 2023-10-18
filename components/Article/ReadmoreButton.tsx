@@ -11,7 +11,6 @@ export default function ReadmoreButton({ article }: ReadmoreButtonParams) {
     <button
       onClick={() => {
         if (article.rssId === 'custom-article') {
-          console.log(article._id)
           window.location.replace(`/article/${article._id}`)
           return
         }

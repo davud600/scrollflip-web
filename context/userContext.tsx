@@ -62,6 +62,7 @@ export default function UserProvider({ children }: { children: ReactNode }) {
       const wishListFromStorageJson = localStorage.getItem(
         'userWishlistedProducts'
       )
+
       if (!!!wishListFromStorageJson || wishListFromStorageJson === 'undefined')
         return
 
@@ -113,6 +114,8 @@ export default function UserProvider({ children }: { children: ReactNode }) {
   }, [user])
 
   useEffect(() => {
+    if (userWishlistedProducts.length === 0) return
+
     const updateLocalStorage = async () => {
       localStorage.setItem(
         'userWishlistedProducts',
@@ -196,14 +199,14 @@ export default function UserProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const logOut = async (navigation: any) => {
+  const logOut = async () => {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
 
     setUser(null)
     setToken(null)
 
-    navigation.navigate('Log In')
+    window.location.replace('/login')
   }
   /**
    * Auth END

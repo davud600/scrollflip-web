@@ -1,4 +1,4 @@
-import { UserWishListedProduct } from '@/types/user.types'
+import { type UserWishListedProduct } from '@/types/user.types'
 import { useState } from 'react'
 
 type AddOrRemoveToWishlistButtonProps = {
@@ -8,7 +8,7 @@ type AddOrRemoveToWishlistButtonProps = {
   removeProductFromWishlist: (product: UserWishListedProduct) => void
 }
 
-export default function AddOrRemoveToWhishlistButton({
+export default function AddOrRemoveToWishlistButton({
   product,
   userWishlistedProducts,
   addProductToWishlist,
@@ -16,7 +16,9 @@ export default function AddOrRemoveToWhishlistButton({
 }: AddOrRemoveToWishlistButtonProps) {
   let isProductWishlisted = false
   userWishlistedProducts.forEach((item) => {
-    if (item.name === product.name) isProductWishlisted = true
+    if (item.name === product.name) {
+      isProductWishlisted = true
+    }
   })
 
   const [isWishlisted, setIsWishlisted] = useState(!isProductWishlisted)
@@ -34,33 +36,16 @@ export default function AddOrRemoveToWhishlistButton({
 
   return (
     <button
+      className="m-4 flex items-center justify-center rounded-sm border border-[#144270] py-2"
       onClick={toggleSwitch}
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        margin: 10,
-        height: 45,
-        borderRadius: 2,
         backgroundColor: isWishlisted ? 'white' : '#144270',
-        borderWidth: 1,
-        borderColor: '#144270',
-        width: isWishlisted ? 160 : 210,
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          gap: 5,
-          paddingLeft: 10,
-        }}
-      >
+      <div className="flex h-full items-center justify-start gap-2 px-2">
         {isWishlisted ? (
           <svg
-            className="h-7 w-7 fill-blue-800"
+            className="h-7 w-7 fill-[#144270]"
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
             viewBox="0 0 512 512"
@@ -69,7 +54,7 @@ export default function AddOrRemoveToWhishlistButton({
           </svg>
         ) : (
           <svg
-            className="h-7 w-7 fill-blue-800"
+            className="h-7 w-7 fill-white"
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
             viewBox="0 0 512 512"
@@ -79,11 +64,9 @@ export default function AddOrRemoveToWhishlistButton({
         )}
 
         <span
+          className="whitespace-nowrap px-2 py-1 text-base"
           style={{
             color: isWishlisted ? '#144270' : 'white',
-            paddingLeft: 6,
-            paddingTop: 4,
-            fontSize: 15,
           }}
         >
           {isWishlisted ? 'Add to Wishlist' : 'Remove From Wishlist'}
