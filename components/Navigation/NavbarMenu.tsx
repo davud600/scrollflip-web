@@ -87,6 +87,9 @@ export default function NavbarMenu() {
                 <Link href={'/privacy'}>
                   <span style={{ fontSize: 15 }}>Privacy Policy</span>
                 </Link>
+                <Link href={'/newsletter'}>
+                  <span style={{ fontSize: 15 }}>Newsletter</span>
+                </Link>
                 <button>
                   <span style={{ fontSize: 15 }}>@2023 ScrollFlip</span>
                 </button>
